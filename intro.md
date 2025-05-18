@@ -84,10 +84,9 @@ This document contains fundamental concepts of computer systems and operating sy
 
 2. **Firmware (BIOS/UEFI) Stage**
    - Firmware performs POST:
-        * Tests critical hardware componentss
+        * Tests critical hardware components
         * Checks CPU, memory, and basic hardware
         * If tests fail, system beeps or displays error codeslays error codes
-   - Initializes basic hardware componentsonents
    - Identifies boot devices according to priority
    - Locates boot sector (MBR) or EFI System Partition
 
