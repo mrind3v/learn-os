@@ -12,22 +12,18 @@
   - [Case Studies](#case-studies)
 - [Services provided by Operating System](#services-provided-by-operating-system)
 
-## Today's Content
-
-- Buses
-- Computer architecture
-  - Single processor
-  - Multi processor
-- Operating System Operations
-  - Kernels
-- Operating system services
-  - Interfaces
-  - Sys calls
-  - Bottle Necks
 
 ## Buses
 
-Buses are wires that carry information, serving as a bridge between RAM & CPU. They help in transmitting data, address, or control signals from CPU to RAM or RAM to CPU.
+Buses are physical communication pathways on the motherboard that connect various computer components. They act as a universal communication system for:
+
+**Components Connected by Buses:**
+- CPU to RAM
+- CPU to Cache
+- CPU to Input/Output devices
+- CPU to Storage devices (HDD/SSD)
+- RAM to Graphics Card
+- Motherboard to Expansion Cards
 
 ### Types of Buses
 
@@ -35,17 +31,54 @@ Buses are wires that carry information, serving as a bridge between RAM & CPU. T
 - Transfers actual data between processor & memory
 - Wider data bus means more bits transferred per cycle
 - 64 bits → 64 bits transferred in one CPU cycle
+- Bidirectional (data can flow both ways)
+
 
 **2. Address bus**
-- Carries address in memory where we need to write or read data
+- Carries memory addresses from CPU to memory components
+- Unidirectional (CPU → memory only)
+- Works together with data and control buses:
 - Size determines addressable memory:
   - 16 bit → 2^16 = 64 KB
   - 32 bit → 2^32 = 4 GB
 - A 32-bit address bus can only store addresses up to 4 GB, so with 8 GB RAM, we need a proper address bus
 
 **3. Control Bus**
-- Carries signals which control activities (read, write, interrupts)
-- Responsible for coordinating between buses
+- Coordinates operations between components
+- Carries signals like:
+  * Read/Write commands
+  * Memory ready signals
+  * Interrupt signals
+  * Clock signals
+  * Error signals
+
+### Interplay Between the Buses (an Example)
+
+**Reading from Memory:**
+1. CPU needs data (triggered by instruction like `MOV AX, [1000H]`)
+2. Control Unit in CPU:
+   - Activates memory read signal on control bus (goes to memory)
+   - Places address 1000H on address bus (connects to memory)
+3. Memory responds to read signal:
+   - Recognizes address on address bus
+   - Places data from that location onto _data bus_
+4. CPU:
+   - Reads data from data bus
+   - Stores it in specified register (AX)
+5. Control Unit deactivates read signal
+
+**Writing to Memory:**
+1. CPU needs to write data (triggered by instruction like `MOV [2000H], BX`)
+2. Control Unit in CPU:
+   - Activates memory write signal on control bus (goes to memory)
+   - Places address 2000H on address bus (connects to memory)
+   - Places data from BX register on data bus (goes to memory)
+3. Memory responds to write signal:
+   - Recognizes address on address bus
+   - Takes data from data bus
+   - Stores it at specified address
+4. Control Unit deactivates write signal
+
 
 ### Expansion Buses
 
@@ -145,6 +178,3 @@ Operating systems provide an environment where programs can be executed. A progr
   - `rm file.txt` → remove file
 
 **API**
-
----
-Answer from Perplexity: pplx.ai/share
