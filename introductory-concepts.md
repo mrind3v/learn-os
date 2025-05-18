@@ -130,8 +130,25 @@
         * Initializes system components
         * Sets up memory management
         * Loads essential drivers
-    - Starts system services
-    - Initializes user space
+
+    - System Initialization:
+        * Kernel starts the first process (init/systemd in Linux, smss.exe in Windows)
+        * This process becomes the parent of all other system processes
+        * Starts essential system services in sequence:
+            - File system services
+            - Network services
+            - Device drivers
+            - System daemons/background services
+
+    - User Space Initialization:
+        * Starts user-space initialization process
+        * Loads user environment settings
+        * Initializes graphical subsystem:
+            - Graphics drivers
+            - Window system (X.org/Wayland in Linux, Windows GUI)
+            - Desktop environment
+        * Sets up user interface components
+
 5. **Login Screen**
     - Display manager starts
     - Login interface appears

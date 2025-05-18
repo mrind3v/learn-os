@@ -37,10 +37,20 @@ Buses are physical communication pathways on the motherboard that connect variou
 **2. Address bus**
 - Carries memory addresses from CPU to memory components
 - Unidirectional (CPU → memory only)
-- Works together with data and control buses:
+- Works together with data and control buses
 - Size determines addressable memory:
-  - 16 bit → 2^16 = 64 KB
-  - 32 bit → 2^32 = 4 GB
+  - 16-bit address bus example:
+    * Has 16 wires/lines carrying binary signals
+    * Each combination represents a unique memory address
+    * Total possible combinations = 2^16 = 65,536
+    * Each address points to ONE byte of memory
+    * Therefore: 65,536 unique addresses × 1 byte = 65,536 bytes = 64 KB
+    * Note: The 16-bit width of address bus only determines number of unique locations,
+           not the size of data at each location
+  - 32-bit address bus:
+    * Total possible addresses = 2^32
+    * Each address points to 1 byte
+    * Total addressable memory = 2^32 bytes = 4 GB
 - A 32-bit address bus can only store addresses up to 4 GB, so with 8 GB RAM, we need a proper address bus
 
 **3. Control Bus**
@@ -103,9 +113,21 @@ M3 Pro (192-bit) vs M1 Pro & M2 Pro (256-bit) memory bus:
 - Example: Nokia phones where you could run only one app at a time
 
 **2. Multiprocessor system**
-- Two or more processors, each with a single core CPU
-- All processors share computer bus, memory and devices
-- More work completed in less time
+- System with multiple processors (CPUs)
+- Each processor can execute instructions independently
+
+**Real-world Example:**
+- While one processor is:
+  * Handling your video call
+  * Another processor can simultaneously:
+    - Process your spreadsheet calculations
+    - Handle background music playing
+    - Run your antivirus scan
+
+**Advantages:**
+- True parallel execution (multiple things happening at exact same time)
+- Better performance for multiple tasks
+- System keeps running even if one processor fails
 
 **3. Multicore system**
 - One CPU/processor containing multiple cores
@@ -114,25 +136,37 @@ M3 Pro (192-bit) vs M1 Pro & M2 Pro (256-bit) memory bus:
 - Less power consumption
 - In-chip communication is faster compared to multiprocessor systems
 
-## Operating Systems Operations
-
-Operating systems provide an environment where programs can be executed. A program in execution is called a process.
-
-**Bootstrap Process:**
-1. Turn on computer → Bootstrap Program loads
-2. Loads kernel into memory
-3. Kernel provides services to users and applications
-
-**Kernel**
-- Brain of the operating system
-- Core component responsible for executing all low-level instructions
-- Handles memory management, CPU scheduling, I/O devices
 
 ### Operations of OS
 
 **1. Multiprogramming & Multitasking**
-- Multiprogramming: OS has multiple programs to execute; next process gets a chance when first process is waiting for I/O or has terminated
-- Multitasking: Switches between processes based on a timer (context switching)
+
+**Multiprogramming:**
+- A technique that allows multiple programs to reside in main memory and be executed by a single processor concurrently
+- The primary goal of multiprogramming is to maximize CPU utilization by keeping the CPU busy as much as possible.
+- When one program waits for I/O, CPU switches to another program
+- Like a chef working on multiple dishes:
+  * While waiting for water to boil (I/O wait)
+  * Chef starts chopping vegetables for another dish (CPU utilization)
+  * No time is wasted waiting
+
+
+**Multitasking:**
+- Extension of multiprogramming
+- Switches between programs based on timer (time slicing)
+- Like a teacher in a classroom:
+  * Gives attention to each student for fixed time
+  * Then moves to next student
+  * Comes back to first student after helping others
+  * Everyone gets CPU time, creating illusion of parallelism
+
+
+**Differences:**
+- Multiprogramming: Focus on keeping CPU busy
+- Multitasking: Focus on frequent switching for interactive use
+- Example:
+  * Multiprogramming: Batch processing of multiple programs
+  * Multitasking: Running Chrome, VS Code, and Spotify simultaneously
 
 **2. Resource Management**
 - Process management:
@@ -151,30 +185,64 @@ Operating systems provide an environment where programs can be executed. A progr
 
 ### Case Studies
 
-**Case: Chrome + Docker + VS Code on 8GB RAM Systems**
-- Source: Stack Overflow Developer Survey, Microsoft Dev Blogs
-- Issue: Laptops becoming unusable when running development tools and browser simultaneously
-- Docker consumes significant memory
-- When RAM is full, OS uses hard disk/SSD as "virtual memory"
-- Accessing data from RAM is ~100x faster than from disk
+**Case 1: Development Environment on 8GB RAM**
+- Scenario: Running Chrome + Docker + VS Code
+- Problem breakdown:
+  * Chrome with multiple tabs: ~2-4 GB RAM
+  * Docker container: ~2-3 GB RAM
+  * VS Code with extensions: ~1-2 GB RAM
+  * Total needed: ~8 GB (entire RAM)
+- What happens:
+  * Like trying to fit items in a full backpack
+  * When RAM fills up:
+    - OS starts using hard disk as extra memory
+    - Similar to storing overflow items in a locker
+    - But accessing locker (disk) is much slower than backpack (RAM)
+- Impact:
+  * System becomes sluggish
+  * Apps take longer to respond
+  * Mouse movements may stutter
+- Solution:
+  * Close unused Chrome tabs
+  * Stop unused Docker containers
+  * Limit VS Code extensions
+  * Upgrade RAM to 16GB
 
-**Case: Microsoft Teams on Intel i5 Laptops During Screen Recording**
-- Source: Reddit (r/sysadmin, r/Surface), Microsoft Support Forums
-- Issue: Heavy lag and app crashes during video conferencing with screen sharing on dual-core CPUs
+**Case 2: Video Conferencing with Screen Share**
+- Scenario: Microsoft Teams on dual-core Intel i5
+- What's happening:
+  * Screen recording needs to:
+    - Capture screen (CPU task)
+    - Compress video (CPU task)
+    - Send data over network
+    - Handle meeting audio/video
+    - Show other participants
+  * Like a chef trying to cook 5 dishes with 2 hands
+- Problems:
+  * CPU gets overwhelmed
+  * Frame rate drops
+  * Audio may stutter
+  * App might freeze
+- Solutions:
+  * Close background applications
+  * Lower video quality
+  * Disable video effects
+  * Use CPU with more cores
 
-**Common Bottlenecks:**
-- Memory bus
-- CPU usage
-- Cache size
+**Common Bottlenecks Explained:**
+1. Memory Bus (Data Highway)
+   * Like a road between CPU and RAM
+   * More lanes (width) = more data per trip
+   * Traffic jams cause slowdown
 
-## Services provided by Operating System
+2. CPU Usage (Processing Power)
+   * Like workers in a factory
+   * More cores = more workers
+   * Too many tasks = delayed work
 
-**User Interface**
-- GUI (Graphical User Interface)
-- CLI (Command Line Interface)
-  - `mkdir` → make directory/folder
-  - `pwd` → print path of current directory
-  - `ls` → list all items
-  - `rm file.txt` → remove file
+3. Cache Size (Quick Access Storage)
+   * Like a desk vs storage room
+   * Frequently used items on desk (cache)
+   * Limited desk space = more trips to storage
 
-**API**
+
