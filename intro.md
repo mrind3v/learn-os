@@ -192,17 +192,63 @@ This document contains fundamental concepts of computer systems and operating sy
 
 ## 4. Key Principles of Memory Organization
 
-### Hierarchy Characteristics
-1. **Speed vs Capacity**
-   - Faster memory = Smaller capacity
-   - Slower memory = Larger capacity
+### 2.2 Memory Hierarchy
 
-2. **Cost Implications**
-   - Faster memory technologies cost more
-   - Trade-off between performance and cost
 
-### Access Patterns
-- Temporal locality
-- Spatial locality
-- Cache hit/miss concepts
+1. **Registers**
+   - Fastest access (~1 nanosecond)
+   - Smallest storage capacity (bytes to kilobytes)
+   - Located within CPU
+   - Most expensive per byte
+   - Volatile memory
+   - Direct CPU access
+   
+2. **Cache Memory**
+   - L1 Cache:
+     * Access time: ~1-2 nanoseconds
+     * Size: 32KB to 64KB per core
+     * Located on CPU die
+   - L2 Cache:
+     * Access time: ~4-7 nanoseconds
+     * Size: 256KB to 512KB per core
+     * Located on CPU die
+   - L3 Cache:
+     * Access time: ~10-20 nanoseconds
+     * Size: Several MB shared between cores
+     * Located on CPU die
+   - Bridges speed gap between CPU and RAM
+   - Volatile memory
+   - Very expensive per byte
+
+3. **Main Memory (RAM)**
+   - Access time: ~100-1000 nanoseconds
+   - Size: Several GB to TB
+   - Volatile storage
+   - Direct CPU access
+   - Moderate cost per byte
+   - Located on motherboard
+
+4. **Secondary Storage**
+   - SSDs:
+     * Access time: ~10-200 microseconds
+     * Size: Hundreds of GB to several TB
+     * Non-volatile storage
+     * Moderate cost per byte
+   - Hard Drives:
+     * Access time: ~5-10 milliseconds
+     * Size: Several TB
+     * Non-volatile storage
+     * Lowest cost per byte
+   - Located in computer chassis
+
+### Memory Characteristics Comparison
+| Type      | Speed | Size    | Cost/Byte | Volatility |
+|-----------|-------|---------|-----------|------------|
+| Registers | Fastest| Smallest| Highest   | Volatile   |
+| Cache     | Very Fast| Small | Very High | Volatile   |
+| RAM       | Fast   | Medium  | Moderate  | Volatile   |
+| SSD       | Slow   | Large  | Low       | Non-volatile|
+| HDD       | Slowest| Largest| Lowest    | Non-volatile|
+
+
 
