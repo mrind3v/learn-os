@@ -1,27 +1,16 @@
 # OS: Deep Dive
 
 ## Table of Contents
-- [Buses](#buses)
-  - [Types of Buses](#types-of-buses)
-    - [Data Bus](#1-data-bus)
-    - [Address Bus](#2-address-bus)
-    - [Control Bus](#3-control-bus)
-  - [Interplay Between the Buses](#interplay-between-the-buses-an-example)
-  - [Expansion Buses](#expansion-buses)
-  - [Case Study](#case-study)
-- [Computer System Architecture](#computer-system-architecture)
-  - [Single Processor System](#1-single-processor-system)
-  - [Multiprocessor System](#2-multiprocessor-system)
-  - [Multicore System](#3-multicore-system)
-- [Operations of OS](#operations-of-os)
-  - [Multiprogramming & Multitasking](#1-multiprogramming--multitasking)
-  - [Resource Management](#2-resource-management)
-  - [Security & Protection](#3-security--protection)
-  - [Virtualization](#4-virtualization)
-- [Case Studies](#case-studies)
-  - [Development Environment](#case-1-development-environment-on-8gb-ram)
-  - [Video Conferencing](#case-2-video-conferencing-with-screen-share)
-  - [Common Bottlenecks](#common-bottlenecks-explained)
+- [OS: Deep Dive](#os-deep-dive)
+  - [Table of Contents](#table-of-contents)
+  - [Buses](#buses)
+    - [Types of Buses](#types-of-buses)
+    - [Interplay Between the Buses (an Example)](#interplay-between-the-buses-an-example)
+    - [Expansion Buses](#expansion-buses)
+    - [Case Study](#case-study)
+  - [Computer System Architecture](#computer-system-architecture)
+    - [Operations of OS](#operations-of-os)
+    - [Case Studies](#case-studies)
 
 
 ## Buses
@@ -190,9 +179,59 @@ M3 Pro (192-bit) vs M1 Pro & M2 Pro (256-bit) memory bus:
 - Cache management
 
 **3. Security & Protection**
+Security and protection mechanisms safeguard the operating system and its resources from unauthorized access, malicious software, and system failures.
+
+**Types of Security Mechanisms:**
+- **Access Control**
+  * User authentication (passwords, biometrics)
+  * File permissions (rwx)
+  * Process privileges
+  * Role-based access (RBAC)
+
+- **Memory Protection**
+  * Process isolation
+  * Address space separation
+  * Stack overflow protection
+  * Memory encryption
+
+- **Network Security**
+  * Firewall controls
+  * Port management
+  * Network access policies
+  * Encrypted communications
+
+- **System Integrity**
+  * Secure boot
+  * Code signing
+  * Antivirus integration
+  * System file protection
 
 **4. Virtualization**
-- Allows one physical computer to behave like many separate computers
+Virtualization creates isolated environments that share underlying physical hardware resources, enabling multiple operating systems or applications to run independently.
+
+**Types of Virtualization:**
+- **Hardware Virtualization**
+  * Type 1 (Bare Metal)
+    - Runs directly on hardware
+    - Examples: VMware ESXi, Xen
+  * Type 2 (Hosted)
+    - Runs on host OS
+    - Examples: VirtualBox, VMware Workstation
+
+- **Application Virtualization**
+  * Containers (Docker, LXC)
+  * Application sandboxing
+  * Platform-specific (Java VM)
+
+- **Network Virtualization**
+  * Virtual LANs (VLANs)
+  * Software-defined networking
+  * Network function virtualization
+
+- **Storage Virtualization**
+  * Storage pools
+  * RAID configurations
+  * Cloud storage integration
 
 ### Case Studies
 
