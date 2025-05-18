@@ -31,7 +31,7 @@ This document contains fundamental concepts of computer systems and operating sy
 
 - **Key Components**:
   - Arithmetic Logic Unit (ALU)
-    * The part of the CPU that actually executes intructions from CPU
+    * The part of the CPU that actually executes intructions from CPU   
   - Control Unit
     * Fetches program instructions from memory and them into control signals that tells CPU's
     subcomponents (ALU, registers) what to do and when to do 
@@ -62,7 +62,104 @@ This document contains fundamental concepts of computer systems and operating sy
 
 ## 3. Operating System Concepts
 
-### Core Functions
+### 3.1 Computer Booting Process
+
+#### Bootstrap Program
+- **Definition**: Special program that initializes and starts the computer system
+- **Location**: Initially invoked from firmware (ROM/EEPROM), with main bootloader components typically located in boot sectors of storage devices (MBR or ESP)
+- **Functions**:
+  - Performs basic hardware diagnostics
+  - Initializes system components and registers
+  - Loads the operating system kernel into memory
+  - Transfers control to the OS
+
+#### Boot Sequence
+1. **Power-On (POST - Power-On Self-Test)**
+   - User presses power button
+   - CPU starts executing instructions from a hardwired memory address:
+        * This address (usually 0xFFFF0 in x86 systems) is physically wired to a ROM chip
+        * The ROM chip contains the firmware (BIOS/UEFI)
+        * When CPU reads from this address, it's actually reading from the ROM chip
+        * First instruction is usually a jump instruction that directs CPU to firmware's main codefirmware's main code
+
+2. **Firmware (BIOS/UEFI) Stage**
+   - Firmware performs POST:
+        * Tests critical hardware componentss
+        * Checks CPU, memory, and basic hardware
+        * If tests fail, system beeps or displays error codeslays error codes
+   - Initializes basic hardware componentsonents
+   - Identifies boot devices according to priority
+   - Locates boot sector (MBR) or EFI System Partition
+
+3. **Bootstrap/Bootloader Stage**
+   - For BIOS systems:
+        * Reads Master Boot Record 
+        * Executes bootloader
+   - For UEFI systems:
+        * Reads EFI System Partition
+        * Executes bootloader
+ 
+   - Bootloader (GRUB/NTLDR/Windows Boot Manager):
+        * Locates OS kernel
+        * Loads kernel into RAM
+        * Transfers control to kernel
+
+4. **Operating System Stage**
+   - Kernel initialization: 
+        * Takes control from bootloader
+        * Initializes system components
+        * Sets up memory managementt
+        * Loads essential drivers
+   - Starts system services
+   - Initializes user space
+
+5. **Login Screen**
+   - Display manager starts
+   - Login interface appears
+   - User authentication begins
+   - Desktop environment loads after successful loginn
+
+### 3.2 Threads and Concurrency
+   - *Threads*
+        - **Definition**: Smallest unit of execution within a process
+
+   - *Concurrency*
+        - **Definition**: Multiple computations happening within the same time period (not necessarily at the exact same time)
+        
+        - **Types**:
+            * **Pseudo-parallelism**: CPU rapidly switches between tasks
+            * **True parallelism**: Multiple tasks execute simultaneously on different processors
+
+
+### 3.3 Difference between Concurrent and Parallel
+- **Concurrent**: Tasks appear to run simultaneously but actually take turns on CPU
+- **Parallel**: Tasks truly run simultaneously on multiple processors
+- Example:
+    * Concurrent: One chef juggling multiple dishes by switching between them
+    * Parallel: Multiple chefs each working on different dishes simultaneously
+
+
+### 3.4 Multithreading
+   - **Definition**: A programming concept where a process can have multiple threads running concurrently
+   
+   - **Real-world Analogy**:
+     * Process = Restaurant
+     * Threads = Chefs working in the restaurant
+     * Multithreading = Multiple chefs working in the same kitchen
+       - Sharing same resources (kitchen equipment, ingredients)
+       - Working independently but coordinated
+       - Can communicate easily with each other
+   
+   - **Key Characteristics**:
+     * All threads share same process resources (like chefs sharing kitchen)
+     * Each thread has its own:
+       - Program counter (recipe step they're on)
+       - Stack (personal workspace)
+       - Registers (personal notes/memory)
+     * Threads can communicate easily (like chefs talking to each other)
+
+
+### Core Functions of the Operating System
 1. Resource Management
    - CPU scheduling
    - Memory allocation
@@ -73,10 +170,12 @@ This document contains fundamental concepts of computer systems and operating sy
    - Graphical user interface
    - System calls
 
+
 3. Process Management
    - Process creation and termination
    - Process scheduling
    - Inter-process communication
+
 
 ### Hotel Management Analogy
 - **System = Hotel Building**
@@ -108,12 +207,3 @@ This document contains fundamental concepts of computer systems and operating sy
 - Spatial locality
 - Cache hit/miss concepts
 
-## Summary
-Understanding these fundamental concepts provides the foundation for:
-- Advanced operating system concepts
-- System architecture
-- Resource management
-- Process scheduling
-- Memory management
-
-*Note: This document serves as a reference for basic concepts in computer systems and operating systems.*
