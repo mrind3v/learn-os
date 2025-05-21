@@ -11,7 +11,11 @@
   - [Computer System Architecture](#computer-system-architecture)
     - [Operations of OS](#operations-of-os)
     - [Case Studies](#case-studies)
-
+  - [Kernel and User Space](#kernel-and-user-space)
+    - [What is the Kernel?](#what-is-the-kernel)
+    - [What Does the Kernel Do?](#what-does-the-kernel-do)
+    - [Kernel Space vs User Space](#kernel-space-vs-user-space)
+ 
 
 ## Buses
 
@@ -278,6 +282,32 @@ Virtualization creates isolated environments that share underlying physical hard
   * Lower video quality
   * Disable video effects
   * Use CPU with more cores
+
+## Kernel and User Space
+
+### What is the Kernel?
+
+The **kernel** is the core part of an operating system. Think of it as the "manager" or "traffic controller" that sits between your computer's hardware and all the software applications you use. The kernel is always running in the background, making sure everything works smoothly and securely.
+
+
+### What Does the Kernel Do?
+- **Resource Management:** Allocates CPU time, memory, and device access to different programs.
+- **Process Management:** Starts, stops, and switches between programs (processes).
+- **Memory Management:** Keeps track of which parts of memory are in use and by which process.
+- **Device Management:** Controls communication between software and hardware (like disks, keyboards, and network cards).
+- **System Security & Protection:** Ensures that programs can't interfere with each other or access unauthorized data.
+- **System Calls:** Provides a safe way for user programs to request services (like reading a file or sending data over the network).
+
+### Kernel Space vs User Space
+- **Kernel Space:**
+  - The memory area where the kernel runs and has full access to all hardware.
+  - Only trusted, core OS code runs here. If something goes wrong in kernel space, it can crash the whole system.
+- **User Space:**
+  - The memory area where user applications (like browsers, editors, games) run.
+  - Programs in user space have limited access and must use system calls to interact with hardware or other programs, keeping the system safe and stable.
+
+**Why the Separation?**
+- This separation protects the system: if a user program crashes, it doesn't affect the kernel or other programs. Only the kernel can directly access hardware, which prevents bugs or malicious code from causing serious damage.
 
 **Understanding Bottlenecks**
 

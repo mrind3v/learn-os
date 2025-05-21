@@ -7,6 +7,9 @@
     - [Process States](#process-states)
     - [Process Components](#process-components)
       - [Example: `open()` System Call (C)](#example-open-system-call-c)
+    - [What are System Calls?](#what-are-system-calls)
+    - [How System Calls Work](#how-system-calls-work)
+    - [Most Common System Calls](#most-common-system-calls)
     - [Process Control Block (PCB)](#process-control-block-pcb)
     - [Process Lifecycle Flow](#process-lifecycle-flow)
   - [2. CPU Scheduling](#2-cpu-scheduling)
@@ -76,6 +79,55 @@ int do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode) {
     return fd;
 }
 ```
+
+### What are System Calls?
+
+A **system call** is the main way a user program interacts with the operating system. User programs (like your code or apps) run in **user mode**, which is restricted for safety and security. When a program needs to perform a privileged operation—such as accessing hardware, reading/writing files, creating processes, or communicating over the network—it must ask the OS to do it on its behalf. This request is made via a system call.
+
+**Intuitive Analogy:**  
+Think of the OS as a hotel manager and your program as a guest. If you want extra towels (access hardware), you can't just walk into the supply room (hardware). Instead, you call the front desk (system call), and the manager (OS) handles it for you.
+
+### How System Calls Work
+
+1. **User Program Requests Service:**  
+   The program calls a library function (like `open()`, `read()`, `write()`, etc.), which prepares the system call.
+
+2. **Mode Switch:**  
+   The CPU switches from user mode to kernel mode (privileged mode) to safely execute the requested operation.
+
+3. **OS Handles the Request:**  
+   The OS checks permissions, performs the requested action (e.g., opens a file, allocates memory), and prepares a result.
+
+4. **Return to User Mode:**  
+   The OS switches back to user mode and returns the result to the program.
+
+**Why not access hardware directly?**  
+Direct access would be unsafe—bugs or malicious code could crash the system or steal data. System calls provide a controlled, secure interface.
+
+### Most Common System Calls
+
+- **Process Control:**  
+  - `fork()`, `exec()`, `exit()`, `wait()`
+  - Create, run, terminate, or wait for processes.
+
+- **File Management:**  
+  - `open()`, `close()`, `read()`, `write()`, `lseek()`
+  - Open, close, read from, write to, or move within files.
+
+- **Device Management:**  
+  - `ioctl()`, `read()`, `write()`
+  - Interact with hardware devices.
+
+- **Information Maintenance:**  
+  - `getpid()`, `alarm()`, `sleep()`
+  - Get process ID, set timers, pause execution.
+
+- **Communication:**  
+  - `pipe()`, `shmget()`, `mmap()`, `msgget()`, `socket()`
+  - Inter-process communication (IPC), shared memory, sockets for networking.
+
+**Summary:**  
+System calls are the "gateways" between user programs and the OS, ensuring safe and controlled access to system resources.
 
 ### Process Control Block (PCB)
 
