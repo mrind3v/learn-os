@@ -120,8 +120,8 @@ Schedulers ensure process execution alternates between CPU bursts and I/O bursts
 - **Arrival time:** When process enters the ready queue.
 - **Burst time:** Time required by a process for execution on CPU.
 - **Completion time:** When process finishes execution.
-- **Turnaround time (TAT):** Completion time - Arrival time.
-- **Waiting time:** Turnaround time - Burst time.
+- **Turnaround time (TAT):** Completion time - Arrival time (total time the CPU took from arrival of the process to completing execution)
+- **Waiting time:** Turnaround time - Burst time (Burst time is the actual time needed for the process to be executed by the CPU, but it took the CPU, Turnaround amount of time to actually finally complete the process. So wait time is the extra amount of time for complete process execution)
 
 ---
 
@@ -129,8 +129,8 @@ Schedulers ensure process execution alternates between CPU bursts and I/O bursts
 
 #### First Come First Serve (FCFS)
 
-- Non-preemptive, queue-based (FIFO).
-- Processes are executed in the order they arrive.
+- Non-preemptive (no context-switching), queue-based (FIFO).
+- First process arrived will be executed first (so sort processes based on arrival time)
 
 | Process | Arrival | Burst | Start | Completion | Wait | TAT |
 |---------|---------|-------|-------|------------|------|-----|
@@ -217,12 +217,3 @@ A **context switch** is the act of:
 - **CPU-bound process:** Spends most of the time doing computations (e.g., mathematical processing, encryption).
   - CPU burst time is high.
 
----
-
-*Participation matters as much as winning-understanding these concepts is foundational to mastering operating systems!*
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/65467378/cf3b8084-26ec-4189-a577-a3b2b99330e0/Processes1.pdf
-
----
-Answer from Perplexity: pplx.ai/share

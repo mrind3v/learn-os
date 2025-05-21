@@ -5,25 +5,12 @@
   - [Table of Contents](#table-of-contents)
   - [Buses](#buses)
     - [Types of Buses](#types-of-buses)
-      - [Data Bus](#data-bus)
-      - [Address Bus](#address-bus)
-      - [Control Bus](#control-bus)
-    - [Interplay Between the Buses](#interplay-between-the-buses)
+    - [Interplay Between the Buses (an Example)](#interplay-between-the-buses-an-example)
     - [Expansion Buses](#expansion-buses)
     - [Case Study](#case-study)
   - [Computer System Architecture](#computer-system-architecture)
-    - [Single Processor System](#single-processor-system)
-    - [Multiprocessor System](#multiprocessor-system)
-    - [Multicore System](#multicore-system)
     - [Operations of OS](#operations-of-os)
-      - [Multiprogramming & Multitasking](#multiprogramming--multitasking)
-      - [Resource Management](#resource-management)
-      - [Security & Protection](#security--protection)
-      - [Virtualization](#virtualization)
     - [Case Studies](#case-studies)
-      - [Case 1: Development Environment on 8GB RAM](#case-1-development-environment-on-8gb-ram)
-      - [Case 2: Video Conferencing with Screen Share](#case-2-video-conferencing-with-screen-share)
-      - [Common Bottlenecks Explained](#common-bottlenecks-explained)
 
 
 ## Buses
@@ -291,6 +278,48 @@ Virtualization creates isolated environments that share underlying physical hard
   * Lower video quality
   * Disable video effects
   * Use CPU with more cores
+
+**Understanding Bottlenecks**
+
+A bottleneck is a point of congestion in a system that occurs when workload arrives too quickly for the system to handle. Think of it like a traffic jam at a highway merger - even if the rest of the highway is clear, that one narrow point slows everything down.
+
+**How Bottlenecks Work:**
+- System performance is limited by its slowest component
+- Like a chain, system is only as fast as its weakest link
+- When one component hits 100% utilization, it creates backlog
+- Other components wait idle while bottleneck clears
+
+**Key Characteristics:**
+1. Resource Saturation
+   * One component at/near maximum capacity
+   * Other resources waiting or underutilized
+   * Performance degrades significantly
+
+2. Ripple Effects
+   * Slows down entire system
+   * Creates queues of waiting tasks
+   * May cause timeouts or failures
+   * Impacts user experience
+
+**Identifying Bottlenecks:**
+- High resource usage (CPU, RAM, Disk, Network)
+- Long queue lengths or wait times
+- System monitoring tools show:
+  * Resource utilization spikes
+  * Performance counters
+  * Response time increases
+
+**Ways to Address Bottlenecks:**
+1. Short-term fixes:
+   * Close unnecessary programs
+   * Clear cache and temporary files
+   * Reduce workload on the system
+
+2. Long-term solutions:
+   * Upgrade hardware components
+   * Optimize software code
+   * Better load distribution
+   * Scale system resources
 
 **Common Bottlenecks Explained:**
 1. Memory Bus (Data Highway)
