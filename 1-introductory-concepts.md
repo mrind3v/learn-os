@@ -10,6 +10,7 @@
   - [2. Detailed Component Analysis](#2-detailed-component-analysis)
     - [2.1 CPU (Central Processing Unit)](#21-cpu-central-processing-unit)
     - [2.2 Memory Hierarchy](#22-memory-hierarchy)
+    - [Memory Characteristics Comparison](#memory-characteristics-comparison)
   - [3. Operating System Concepts](#3-operating-system-concepts)
     - [3.1 Computer Booting Process](#31-computer-booting-process)
       - [Bootstrap Program](#bootstrap-program)
@@ -19,9 +20,6 @@
     - [3.4 Multithreading](#34-multithreading)
     - [Core Functions of the Operating System](#core-functions-of-the-operating-system)
     - [Hotel Management Analogy](#hotel-management-analogy)
-  - [4. Key Principles of Memory Organization](#4-key-principles-of-memory-organization)
-    - [Memory Hierarchy](#memory-hierarchy)
-    - [Memory Characteristics Comparison](#memory-characteristics-comparison)
 
 
 
@@ -88,20 +86,9 @@
             * Usually shared among all CPU cores on the processor
             * Helps reduce bottlenecks when multiple cores need access to the same data
             * Acts as a last-level cache before accessing main memory (RAM)
-    - **How They Differ:**
-        * **Speed:** L1 is fastest, followed by L2, then L3.
-        * **Size:** L1 is smallest, L3 is largest.
-        * **Location:** L1 and L2 are closer to individual CPU cores; L3 is shared across cores.
-        * **Purpose:** L1 serves immediate CPU needs, L2 backs up L1, and L3 reduces main memory access for all cores.
-    - **Why do multiple cache levels exist?**
-        * There is a trade-off between speed, size, and cost. Fast memory is expensive and limited in size, while larger memory is slower and cheaper.
-        * L1 cache is very fast but small and costly, so only a little can be used per core.
-        * L2 cache is a bit slower but larger, providing more storage for each core.
-        * L3 cache is even larger and shared, helping all cores access common data and reducing trips to slower main memory.
-        * This layered approach balances speed, efficiency, and cost, ensuring the CPU gets fast access to the most-used data while still having access to larger amounts of cache when needed.
+
     - L1/L2 Cache: ~1-10 nanoseconds
     - L3 Cache: ~10-100 nanoseconds
-    - Bridges speed gap between CPU and RAM
 3. **Main Memory (RAM)**
     - Access time: ~100-1000 nanoseconds
     - Volatile storage
@@ -110,6 +97,15 @@
     - SSDs: ~10-200 microseconds
     - Hard Drives: Slower but larger capacity
     - Non-volatile storage
+### Memory Characteristics Comparison
+
+| Type | Speed | Size | Cost/Byte | Volatility |
+| :-- | :-- | :-- | :-- | :-- |
+| Registers | Fastest | Smallest | Highest | Volatile |
+| Cache | Very Fast | Small | Very High | Volatile |
+| RAM | Fast | Medium | Moderate | Volatile |
+| SSD | Slow | Large | Low | Non-volatile |
+| HDD | Slowest | Largest | Lowest | Non-volatile |
 
 ## 3. Operating System Concepts
 
@@ -252,80 +248,5 @@
     - Room service → Resource allocation
 
 
-## 4. Key Principles of Memory Organization
 
-### Memory Hierarchy
-
-1. **Registers**
-    - Fastest access (~1 nanosecond)
-    - Smallest storage capacity (bytes to kilobytes)
-    - Located within CPU
-    - Most expensive per byte
-    - Volatile memory
-    - Direct CPU access
-2. **Cache Memory**
-    - Cache is a small, high-speed memory located close to or inside the CPU, used to temporarily store frequently accessed data and instructions.
-    - **Types of Cache:**
-        - **L1 Cache (Level 1):**
-            * Smallest and fastest cache (typically 32KB–64KB per core)
-            * Located directly on the CPU core
-            * Split into instruction cache (I-cache) and data cache (D-cache)
-            * Provides the quickest access to data for the CPU
-        - **L2 Cache (Level 2):**
-            * Larger than L1 (typically 256KB–512KB per core)
-            * Slightly slower than L1 but still very fast
-            * Can be dedicated per core or shared by a few cores
-            * Acts as a backup for L1 cache, storing data not found in L1
-        - **L3 Cache (Level 3):**
-            * Largest and slowest among the three (several MB, e.g., 4MB–32MB)
-            * Usually shared among all CPU cores on the processor
-            * Helps reduce bottlenecks when multiple cores need access to the same data
-            * Acts as a last-level cache before accessing main memory (RAM)
-    - **How They Differ:**
-        * **Speed:** L1 is fastest, followed by L2, then L3.
-        * **Size:** L1 is smallest, L3 is largest.
-        * **Location:** L1 and L2 are closer to individual CPU cores; L3 is shared across cores.
-        * **Purpose:** L1 serves immediate CPU needs, L2 backs up L1, and L3 reduces main memory access for all cores.
-    - **Why do multiple cache levels exist?**
-        * There is a trade-off between speed, size, and cost. Fast memory is expensive and limited in size, while larger memory is slower and cheaper.
-        * L1 cache is very fast but small and costly, so only a little can be used per core.
-        * L2 cache is a bit slower but larger, providing more storage for each core.
-        * L3 cache is even larger and shared, helping all cores access common data and reducing trips to slower main memory.
-        * This layered approach balances speed, efficiency, and cost, ensuring the CPU gets fast access to the most-used data while still having access to larger amounts of cache when needed.
-    - L1/L2 Cache: ~1-10 nanoseconds
-    - L3 Cache: ~10-100 nanoseconds
-    - Bridges speed gap between CPU and RAM
-3. **Main Memory (RAM)**
-    - Access time: ~100-1000 nanoseconds
-    - Size: Several GB to TB
-    - Volatile storage
-    - Direct CPU access
-    - Moderate cost per byte
-    - Located on motherboard
-4. **Secondary Storage**
-    - SSDs:
-        * Access time: ~10-200 microseconds
-        * Size: Hundreds of GB to several TB
-        * Non-volatile storage
-        * Moderate cost per byte
-    - Hard Drives:
-        * Access time: ~5-10 milliseconds
-        * Size: Several TB
-        * Non-volatile storage
-        * Lowest cost per byte
-    - Located in computer chassis
-
-### Memory Characteristics Comparison
-
-| Type | Speed | Size | Cost/Byte | Volatility |
-| :-- | :-- | :-- | :-- | :-- |
-| Registers | Fastest | Smallest | Highest | Volatile |
-| Cache | Very Fast | Small | Very High | Volatile |
-| RAM | Fast | Medium | Moderate | Volatile |
-| SSD | Slow | Large | Low | Non-volatile |
-| HDD | Slowest | Largest | Lowest | Non-volatile |
-
-<div style="text-align: center">⁂</div>
-
-[^1]: paste.txt
 
