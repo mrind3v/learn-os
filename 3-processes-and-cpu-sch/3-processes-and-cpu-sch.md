@@ -5,13 +5,13 @@
   - [Table of Contents](#table-of-contents)
   - [1. What is a Process?](#1-what-is-a-process)
     - [Process States](#process-states)
+    - [Process Lifecycle Flow](#process-lifecycle-flow)
     - [Process Components](#process-components)
       - [Example: `open()` System Call (C)](#example-open-system-call-c)
     - [What are System Calls?](#what-are-system-calls)
     - [How System Calls Work](#how-system-calls-work)
     - [Most Common System Calls](#most-common-system-calls)
     - [Process Control Block (PCB)](#process-control-block-pcb)
-    - [Process Lifecycle Flow](#process-lifecycle-flow)
   - [2. CPU Scheduling](#2-cpu-scheduling)
     - [CPU Scheduler](#cpu-scheduler)
     - [Preemptive vs Non-Preemptive Scheduling](#preemptive-vs-non-preemptive-scheduling)
@@ -41,6 +41,17 @@ A process moves through various states during its lifetime:
 - **Terminated:** Process has finished execution and is being removed from the system.
 
 **Note:** Only one process can be running on any processor core at any instant.
+
+### Process Lifecycle Flow
+
+1. **New Process → Ready Queue:** Process is created and enters the ready queue.
+2. **Dispatched → CPU:** Scheduler selects the process and assigns it to a CPU core.
+3. **While Running, three things can happen:**
+   - I/O Request → moved to I/O wait queue
+   - Child Process Created → moved to wait queue
+   - Interrupted/Time Slice Over → returned to ready queue
+4. **Event Completes:** Process moves from wait queue to ready queue.
+5. **Termination:** Process is removed from all queues and resources are deallocated.
 
 ### Process Components
 
@@ -101,30 +112,38 @@ Think of the OS as a hotel manager and your program as a guest. If you want extr
 4. **Return to User Mode:**  
    The OS switches back to user mode and returns the result to the program.
 
-**Why not access hardware directly?**  
-Direct access would be unsafe—bugs or malicious code could crash the system or steal data. System calls provide a controlled, secure interface.
 
 ### Most Common System Calls
 
 - **Process Control:**  
-  - `fork()`, `exec()`, `exit()`, `wait()`
-  - Create, run, terminate, or wait for processes.
+  - `fork()`: Create a new process (child process)
+  - `exec()`: Replace current process image with a new program
+  - `exit()`: Terminate the current process
+  - `wait()`: Wait for a child process to finish
 
 - **File Management:**  
-  - `open()`, `close()`, `read()`, `write()`, `lseek()`
-  - Open, close, read from, write to, or move within files.
+  - `open()`: Open a file for reading or writing
+  - `close()`: Close an open file descriptor
+  - `read()`: Read data from a file
+  - `write()`: Write data to a file
+  - `lseek()`: Move the file pointer to a specific location
 
 - **Device Management:**  
-  - `ioctl()`, `read()`, `write()`
-  - Interact with hardware devices.
+  - `ioctl()`: Control device parameters
+  - `read()`: Read from a device
+  - `write()`: Write to a device
 
 - **Information Maintenance:**  
-  - `getpid()`, `alarm()`, `sleep()`
-  - Get process ID, set timers, pause execution.
+  - `getpid()`: Get the process ID of the current process
+  - `alarm()`: Set a timer for the process
+  - `sleep()`: Pause execution for a specified time
 
 - **Communication:**  
-  - `pipe()`, `shmget()`, `mmap()`, `msgget()`, `socket()`
-  - Inter-process communication (IPC), shared memory, sockets for networking.
+  - `pipe()`: Create a unidirectional data channel for IPC
+  - `shmget()`: Allocate a shared memory segment
+  - `mmap()`: Map files or devices into memory
+  - `msgget()`: Create or access a message queue
+  - `socket()`: Create an endpoint for network communication
 
 **Summary:**  
 System calls are the "gateways" between user programs and the OS, ensuring safe and controlled access to system resources.
@@ -137,16 +156,7 @@ The **PCB** is a data structure maintained by the OS that contains all the infor
 - Context switching
 - Scheduling the process
 
-### Process Lifecycle Flow
 
-1. **New Process → Ready Queue:** Process is created and enters the ready queue.
-2. **Dispatched → CPU:** Scheduler selects the process and assigns it to a CPU core.
-3. **While Running, three things can happen:**
-   - I/O Request → moved to I/O wait queue
-   - Child Process Created → moved to wait queue
-   - Interrupted/Time Slice Over → returned to ready queue
-4. **Event Completes:** Process moves from wait queue to ready queue.
-5. **Termination:** Process is removed from all queues and resources are deallocated.
 
 ---
 

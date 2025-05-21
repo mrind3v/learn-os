@@ -21,13 +21,6 @@
 
 Buses are physical communication pathways on the motherboard that connect various computer components. They act as a universal communication system for:
 
-**Components Connected by Buses:**
-- CPU to RAM
-- CPU to Cache
-- CPU to Input/Output devices
-- CPU to Storage devices (HDD/SSD)
-- RAM to Graphics Card
-- Motherboard to Expansion Cards
 
 ### Types of Buses
 
@@ -98,7 +91,7 @@ Buses are physical communication pathways on the motherboard that connect variou
 
 **1. PCIe (Peripheral Component Interconnect Express)**
 - High speed bus for CPU & SSD
-- Used for graphical cards/WiFi cards
+- Also connects CPU and GPU
 
 **2. Other expansion buses**
 - USB / HDMI / Thunderbolt / SATA
