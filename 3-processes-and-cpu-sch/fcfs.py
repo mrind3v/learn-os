@@ -19,7 +19,7 @@ def main():
             if at <= time:
                 available.append(p)
         if available == []:
-            time += 1 
+            time += process_list[0][1]
         else:
             # meaning, available has processes in it. So process the first process in it 
             process = available.pop(0)
@@ -37,8 +37,8 @@ def main():
     tatSum = sum(value[1] for value in completed.values())
     waitSum = sum(value[2] for value in completed.values())
 
-    print(tatSum//n)
     print(waitSum//n)
+    print(tatSum//n)
     
     
     if __name__=="__main__":
