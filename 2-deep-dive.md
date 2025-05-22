@@ -19,7 +19,7 @@
 
 ## Buses
 
-Buses are physical communication pathways on the motherboard that connect various computer components. They act as a universal communication system for:
+Buses are physical communication pathways on the motherboard that connect various computer components.
 
 
 ### Types of Buses
