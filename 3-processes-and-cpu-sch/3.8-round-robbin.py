@@ -39,32 +39,31 @@ def main():
             # and let it be executed
             if ready_queue:
                 curr_process_ref = ready_queue.popleft() 
-                current_quantum_used = 0 # new process is being executed, so reset counter
+                current_quantum_used = 0 # new process will be executed, so reset counter
             else:
                 time+=1
-                continue
         # if there is actually a process running in CPU - simulate process executed by CPU
-        
-        curr_process_ref[1]-=1
-        current_quantum_used+=1
-        time+=1
-        
-        # after executing process in CPU, if current process burst time becomes zero
-        # meaning, completed execution - add it to the completed dic
-        if curr_process_ref[1]==0:
-            pid = curr_process_ref[2]
-            at = curr_process_ref[0]
-            bt = org_burst_times[pid] 
-            ct = time 
-            tat = ct - at 
-            wait = tat - bt 
-            completed[pid] = [ct,tat,wait]
-            process_list.remove(curr_process_ref)    
-            curr_process_ref=None # cpu is now free  
-        # if process couldn't be completed due to time quanta expiry
-        elif current_quantum_used==tq:     
-            ready_queue.append(curr_process_ref)
-            curr_process_ref = None # cpu is now free 
+        else:
+            curr_process_ref[1]-=1
+            current_quantum_used+=1
+            time+=1
+            
+            # after executing process in CPU, if current process burst time becomes zero
+            # meaning, completed execution - add it to the completed dic
+            if curr_process_ref[1]==0:
+                pid = curr_process_ref[2]
+                at = curr_process_ref[0]
+                bt = org_burst_times[pid] 
+                ct = time 
+                tat = ct - at 
+                wait = tat - bt 
+                completed[pid] = [ct,tat,wait]
+                process_list.remove(curr_process_ref)    
+                curr_process_ref=None # cpu is now free  
+            # if process couldn't be completed due to time quanta expiry
+            elif current_quantum_used==tq:     
+                ready_queue.append(curr_process_ref)
+                curr_process_ref = None # cpu is now free 
     
     tatSum = sum(value[1] for value in completed.values())
     waitSum = sum(value[2] for value in completed.values())
