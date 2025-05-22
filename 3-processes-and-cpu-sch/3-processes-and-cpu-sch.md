@@ -24,6 +24,7 @@
   - [3. Scheduling Queues](#3-scheduling-queues)
   - [4. Context Switching](#4-context-switching)
   - [5. CPU-bound vs I/O-bound Processes](#5-cpu-bound-vs-io-bound-processes)
+    - [Difference Between API and System Call](#difference-between-api-and-system-call)
 
 ---
 
@@ -278,4 +279,28 @@ A **context switch** is the act of:
   - CPU burst time is low.
 - **CPU-bound process:** Spends most of the time doing computations (e.g., mathematical processing, encryption).
   - CPU burst time is high.
+
+---
+
+### Difference Between API and System Call
+
+An **API (Application Programming Interface)** is a set of functions and protocols that allows programs to communicate with each other or with the operating system. In the context of operating systems, APIs (like the C standard library) provide convenient, high-level functions for programmers to use, such as `fopen()`, `printf()`, or `malloc()`.
+
+A **system call** is a low-level request made by a program to the operating system's kernel to perform a privileged operation, such as reading from disk, allocating memory, or creating a process. System calls are the actual interface between user programs and the OS kernel.
+
+**Key Differences:**
+- **Level of Abstraction:**
+  - API: High-level, user-friendly, often portable across OSes.
+  - System Call: Low-level, specific to the OS kernel.
+- **Usage:**
+  - API: Used directly by application programmers.
+  - System Call: Usually invoked by APIs, not directly by most programmers.
+- **Example:**
+  - Calling `fopen()` (API) in C will internally use the `open()` system call to actually open a file.
+- **Portability:**
+  - API: Code using APIs can often run on different operating systems with little or no change.
+  - System Call: Code using system calls is usually OS-specific.
+
+**Summary:**
+- APIs provide a convenient way for programs to interact with the OS, while system calls are the underlying mechanism that actually performs the requested operations in the kernel.
 
