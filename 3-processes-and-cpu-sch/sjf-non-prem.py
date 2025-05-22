@@ -21,7 +21,11 @@ def main():
         if available == []:
             # figure out the process with lowest arrival time in process_list, and increase
             # it to that amount 
-            time += process_list[0][1]
+            inc_time = float('inf')
+            for p in process_list:
+                inc_time = min(inc_time,p[1])
+            time+=inc_time
+            
         else:
             process = available.pop(0)
             at = process[1]
